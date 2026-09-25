@@ -1,0 +1,26 @@
+{
+    "name": "pao-mutation/consumer-fixture",
+    "private": true,
+    "license": "proprietary",
+    "require": {
+        "php": "^8.4",
+        "wheesnoza/pest-plugin-pao-mutation": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../..",
+            "options": { "symlink": true }
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Fixture\\": "src/" }
+    },
+    "config": {
+        "allow-plugins": { "pestphp/pest-plugin": true }
+    },
+    "scripts": {
+        "coverage:check": "@php -r \"if (!extension_loaded('pcov') && !extension_loaded('xdebug')) { fwrite(STDERR, 'PCOV or Xdebug is required for mutation testing.\\n'); exit(1); }\"",
+        "mutate": "@php bin/mutate.php"
+    }
+}
