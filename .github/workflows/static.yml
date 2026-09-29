@@ -7,10 +7,11 @@ permissions:
 
 jobs:
   static:
-    name: Static Tests
+    name: Static Tests - ${{ matrix.dependency-version }}
 
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         dependency-version: [prefer-lowest, prefer-stable]
 
@@ -26,7 +27,7 @@ jobs:
         coverage: none
 
     - name: Install Dependencies
-      run: composer update --prefer-stable --no-interaction --no-progress --ansi
+      run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress --ansi
 
     - name: Types
       run: composer test:types
